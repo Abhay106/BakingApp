@@ -1,5 +1,6 @@
 package com.example.boris.bakingapp.mvp.ui.recipeListFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.example.boris.bakingapp.MainActivity600;
 import com.example.boris.bakingapp.OnItemClickListener;
 import com.example.boris.bakingapp.entity.RecipeModel;
 import com.example.boris.bakingapp.R;
@@ -109,7 +111,6 @@ public class RecipeListFragment extends MvpAppCompatFragment implements RecipeLi
         OnItemClickListener.OnItemClickCallback onItemClickCallback = new OnItemClickListener.OnItemClickCallback() {
             @Override
             public void onItemClicked(View view, int position) {
-
                 RecipeModel itemClicked = listRecipes.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", position);
@@ -119,33 +120,43 @@ public class RecipeListFragment extends MvpAppCompatFragment implements RecipeLi
                 bundle.putParcelableArrayList("steps", new ArrayList<Parcelable>(itemClicked.getSteps()));
                 bundle.putInt("swrvings", itemClicked.getServings());
 
-                DetailedFragment detailedFragment = new DetailedFragment();
-                detailedFragment.setArguments(bundle);
+
+                Intent dataIntent = new Intent(getContext(), MainActivity600.class);
+                dataIntent.putExtras(bundle);
+//                dataIntent.putExtra("image", itemClicked.getImage());
+//                dataIntent.putExtra("name", itemClicked.getName());
+//                dataIntent.putExtra("ingredients", new ArrayList<Parcelable>(itemClicked.getIngredients()));
+//                dataIntent.putExtra("steps", new ArrayList<Parcelable>(itemClicked.getSteps()));
+                startActivity(dataIntent);
 
 
-                if (getResources().getConfiguration().smallestScreenWidthDp >= 600) {
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                DetailedFragment detailedFragment = new DetailedFragment();
+//                detailedFragment.setArguments(bundle);
 
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.main_frame_list_600_detailed, detailedFragment)
-                            .addToBackStack(null)
-                            .commit();
-                    StepDescriptionFragment stepDescriptionFragment =
-                            StepDescriptionFragment.getInstance(itemClicked.getSteps(), 0);
+                StepDescriptionFragment stepDescriptionFragment =
+                        StepDescriptionFragment.getInstance(itemClicked.getSteps(), 0);
 
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.main_frame_list_600_step, stepDescriptionFragment)
-                            .addToBackStack(null)
-                            .commit();
-                } else {
-                    Log.d(TAG_WORK_CHECKING, "Something went wrong in DetaideFragment");
-
-                    FragmentManager manager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.addToBackStack(null);
-                    transaction.replace(R.id.main_frame_list_600_detailed, detailedFragment, "detailed_fragment_tag");
-                    transaction.commit();
-                }
+//                if (getResources().getConfiguration().smallestScreenWidthDp >= 600) {
+//                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//
+//                    fragmentManager.beginTransaction()
+//                            .add(R.id.main_frame_list_600_detailed, detailedFragment)
+//                            .add(R.id.main_frame_list_600_step, stepDescriptionFragment)
+//                            .addToBackStack(null)
+//                            .commit();
+//
+//                    fragmentManager.beginTransaction()
+//                            .addToBackStack(null)
+//                            .commit();
+//                } else {
+//                    Log.d(TAG_WORK_CHECKING, "Something went wrong in DetaideFragment");
+//
+//                    FragmentManager manager = getActivity().getSupportFragmentManager();
+//                    FragmentTransaction transaction = manager.beginTransaction();
+//                    transaction.addToBackStack(null);
+//                    transaction.replace(R.id.main_frame_list_600_detailed, detailedFragment, "detailed_fragment_tag");
+//                    transaction.commit();
+//                }
             }
         };
         return onItemClickCallback;

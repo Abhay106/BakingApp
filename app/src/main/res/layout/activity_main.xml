@@ -7,7 +7,7 @@
     tools:context=".mvp.ui.mainActivity.MainActivity">
 
     <FrameLayout
-        android:id="@+id/main_frame_list_600_detailed"
+        android:id="@+id/main_frame_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
