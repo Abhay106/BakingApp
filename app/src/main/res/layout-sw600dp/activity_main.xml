@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tablet_linear_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    tools:context=".mvp.ui.mainActivity.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/main_frame_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--<FrameLayout-->
+        <!--android:id="@+id/main_frame_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <!--<LinearLayout-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+    <!--<FrameLayout-->
+        <!--android:id="@+id/main_frame_list_1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.5"-->
+        <!--/>-->
+    <!--<FrameLayout android:id="@+id/main_frame_listzz_600"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.5"-->
+        <!--/>-->
+        <!--</LinearLayout>-->
+    <!--</FrameLayout>-->
+
+</LinearLayout>
