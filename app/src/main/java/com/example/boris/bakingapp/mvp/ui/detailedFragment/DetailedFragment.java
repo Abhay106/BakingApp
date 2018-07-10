@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -52,8 +54,8 @@ public class DetailedFragment extends MvpAppCompatFragment implements StepsAdapt
     RecyclerView recyclerIngredients;
     @BindView(R.id.recycler_list_steps)
     RecyclerView recyclerSteps;
-    @BindView(R.id.fragment_detailed_toolbar)
-    android.support.v7.widget.Toolbar toolbar;
+
+    Toolbar toolbar;
 
     @InjectPresenter
     DetailedPresenter detailedPresenter;
@@ -73,26 +75,19 @@ public class DetailedFragment extends MvpAppCompatFragment implements StepsAdapt
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        /*
-        if (config.smallestScreenWidthDp >= 600)
-        {
+        Log.d(TAG_WORK_CHECKING, "DetailedFragment - onCreateView ");
 
-            setContentView(R.layout.activity_main);
-        }
-        else
-        {
-            Log.d(TAG_WORK_CHECKING, "MainActivity - onCreate - NOT config.smallestScreenWidthDp >= 600 ");
-            setContentView(R.layout.activity_main);
-            DetailedFragment detailedFragment = new DetailedFragment();
-            //detailedFragment.onCreateView();
-        }*/
         view = inflater.inflate(R.layout.fragment_detailed, container, false);
         ButterKnife.bind(this, view);
 
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getArguments().getString("name"));
-        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        setHasOptionsMenu(true);
+
+        if (getResources().getConfiguration().smallestScreenWidthDp < 600) {
+            toolbar = (Toolbar) view.findViewById(R.id.fragment_detailed_toolbar);
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getArguments().getString("name"));
+            Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+            setHasOptionsMenu(true);
+        }
 
 
         /**
@@ -156,11 +151,6 @@ public class DetailedFragment extends MvpAppCompatFragment implements StepsAdapt
                 bundle.putString("thumbnailURL", itemClicked.getThumbnailURL());
                 bundle.putInt(EXTRA_STEP_ID, position);
                 bundle.putString("name", getArguments().getString("name"));
-//                bundle.putString("vote_average", itemClicked.getVoteAverage().toString());
-//                bundle.putString("poster_path", itemClicked.getPosterPath());
-//                bundle.putString("id", itemClicked.getId().toString());
-//                Log.d("tagList", "ID is : " + itemClicked.getId());
-//                bundle.putString("path", path);
                 StepDescriptionFragment stepDescriptionFragment = StepDescriptionFragment.getInstance(0);
                 stepDescriptionFragment.setArguments(bundle);
 
@@ -171,12 +161,10 @@ public class DetailedFragment extends MvpAppCompatFragment implements StepsAdapt
                     transaction.replace(R.id.main_frame_list_600_step, stepDescriptionFragment, "detailed_fragment_tag");
                 } else {
                     transaction.addToBackStack(null);
-                    transaction.replace(R.id.main_frame_list_600_detailed, stepDescriptionFragment, "detailed_fragment_tag");
+                    transaction.replace(R.id.main_frame_list, stepDescriptionFragment);
                 }
-
                 transaction.commit();
-                Log.d(TAG_WORK_CHECKING, "DetailedFragment - onItemClicked working well");
-                Log.d(TAG_VAR_VALUE, "Bundle = " + bundle.toString());
+
             }
         };
         return onItemClickCallback;

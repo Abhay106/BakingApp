@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.example.boris.bakingapp.MainActivity600;
+import com.example.boris.bakingapp.tablet.TabletActivity;
 import com.example.boris.bakingapp.OnItemClickListener;
 import com.example.boris.bakingapp.entity.RecipeModel;
 import com.example.boris.bakingapp.R;
@@ -42,8 +42,10 @@ public class RecipeListFragment extends MvpAppCompatFragment implements RecipeLi
     @InjectPresenter
     RecipeListPresenter recipeListPresenter;
 
-    @BindView(R.id.recycler_list_recipes) RecyclerView recyclerView;
-    @BindView(R.id.main_list_toolbar) Toolbar toolbar;
+    @BindView(R.id.recycler_list_recipes)
+    RecyclerView recyclerView;
+    @BindView(R.id.main_list_toolbar)
+    Toolbar toolbar;
 
     View view;
     List<RecipeModel> listRecipes = new ArrayList<>();
@@ -80,11 +82,10 @@ public class RecipeListFragment extends MvpAppCompatFragment implements RecipeLi
 
         listRecipes = new ArrayList<>();
 
-        if(recipeList.isEmpty()) Log.d("Recipes", "The list is empty");
+        if (recipeList.isEmpty()) Log.d("Recipes", "The list is empty");
 
         //Add all data to created list
         listRecipes.addAll(recipeList);
-
 
 
         //Setting data to the adapter
@@ -93,24 +94,14 @@ public class RecipeListFragment extends MvpAppCompatFragment implements RecipeLi
         //Refreshing UI of the recycler with new data
         recipeAdapter.notifyDataSetChanged();
 
-        for(RecipeModel model: recipeList){
-            Log.d("Recipes", model.getName());
-            /*for(Step step: model.getSteps()) {
-                Log.d("Recipes", step.getShortDescription());
-            }*/
-        }
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//        toolbar.inflateMenu(R.menu.menu_main);
-//    }
 
     private OnItemClickListener.OnItemClickCallback setOnItemClickCallback() {
         OnItemClickListener.OnItemClickCallback onItemClickCallback = new OnItemClickListener.OnItemClickCallback() {
             @Override
             public void onItemClicked(View view, int position) {
+                Log.d(TAG_WORK_CHECKING, "In callback");
                 RecipeModel itemClicked = listRecipes.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", position);
@@ -120,47 +111,28 @@ public class RecipeListFragment extends MvpAppCompatFragment implements RecipeLi
                 bundle.putParcelableArrayList("steps", new ArrayList<Parcelable>(itemClicked.getSteps()));
                 bundle.putInt("swrvings", itemClicked.getServings());
 
+                if (getResources().getConfiguration().smallestScreenWidthDp >= 600) {
+                    Log.d(TAG_WORK_CHECKING, "It is more than 600 dp");
+                    Intent dataIntent = new Intent(getContext(), TabletActivity.class);
+                    dataIntent.putExtras(bundle);
+                    startActivity(dataIntent);
 
-                Intent dataIntent = new Intent(getContext(), MainActivity600.class);
-                dataIntent.putExtras(bundle);
-//                dataIntent.putExtra("image", itemClicked.getImage());
-//                dataIntent.putExtra("name", itemClicked.getName());
-//                dataIntent.putExtra("ingredients", new ArrayList<Parcelable>(itemClicked.getIngredients()));
-//                dataIntent.putExtra("steps", new ArrayList<Parcelable>(itemClicked.getSteps()));
-                startActivity(dataIntent);
+                } else {
 
+                    DetailedFragment detailedFragment = new DetailedFragment();
+                    detailedFragment.setArguments(bundle);
 
-//                DetailedFragment detailedFragment = new DetailedFragment();
-//                detailedFragment.setArguments(bundle);
-
-                StepDescriptionFragment stepDescriptionFragment =
-                        StepDescriptionFragment.getInstance(itemClicked.getSteps(), 0);
-
-//                if (getResources().getConfiguration().smallestScreenWidthDp >= 600) {
-//                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//
-//                    fragmentManager.beginTransaction()
-//                            .add(R.id.main_frame_list_600_detailed, detailedFragment)
-//                            .add(R.id.main_frame_list_600_step, stepDescriptionFragment)
-//                            .addToBackStack(null)
-//                            .commit();
-//
-//                    fragmentManager.beginTransaction()
-//                            .addToBackStack(null)
-//                            .commit();
-//                } else {
-//                    Log.d(TAG_WORK_CHECKING, "Something went wrong in DetaideFragment");
-//
-//                    FragmentManager manager = getActivity().getSupportFragmentManager();
-//                    FragmentTransaction transaction = manager.beginTransaction();
-//                    transaction.addToBackStack(null);
-//                    transaction.replace(R.id.main_frame_list_600_detailed, detailedFragment, "detailed_fragment_tag");
-//                    transaction.commit();
-//                }
+                    FragmentManager manager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.addToBackStack(null);
+                    transaction.replace(R.id.main_frame_list, detailedFragment);
+                    transaction.commit();
+                }
             }
         };
         return onItemClickCallback;
     }
+
     @Override
     public void onItemClick(View view, int position) {
 

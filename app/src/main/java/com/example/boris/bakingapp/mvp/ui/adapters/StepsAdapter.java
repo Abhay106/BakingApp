@@ -26,7 +26,7 @@ import static com.example.boris.bakingapp.constants.Contract.TAG_WORK_CHECKING;
 public class StepsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<Step> stepsList;
 
-    private RecipeAdapter.ItemClickListener mClickListener;
+    private com.example.boris.bakingapp.mvp.ui.adapters.RecipeAdapter.ItemClickListener mClickListener;
     OnItemClickListener.OnItemClickCallback onItemClickCallback;
 
     public StepsAdapter(OnItemClickListener.OnItemClickCallback onItemClickCallback) {
@@ -80,7 +80,7 @@ public class StepsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public void setClickListener(RecipeAdapter.ItemClickListener itemClickListener) {
+    public void setClickListener(com.example.boris.bakingapp.mvp.ui.adapters.RecipeAdapter.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 

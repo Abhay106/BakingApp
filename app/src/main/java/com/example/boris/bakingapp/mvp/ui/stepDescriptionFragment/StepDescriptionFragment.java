@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -59,7 +60,6 @@ public class StepDescriptionFragment extends MvpAppCompatFragment {
     @BindView(R.id.recipe_step_tablayout)
     TabLayout recipeStepTabLayout;
 
-    @BindView(R.id.main_list_toolbar)
     Toolbar toolbar;
 
     View view;
@@ -95,6 +95,8 @@ public class StepDescriptionFragment extends MvpAppCompatFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG_WORK_CHECKING, "StepDescriptionFragment - onCreateView ");
+
         int x = getArguments().getInt(StepDescriptionFragment.EXTRA_STEP_ID);
         if (savedInstanceState == null) {
             Log.d(TAG_WORK_CHECKING, "StepDescriptionFragment - onCreate - savedInstanceState == null");
@@ -121,18 +123,13 @@ public class StepDescriptionFragment extends MvpAppCompatFragment {
         Log.d(TAG_VAR_VALUE, "Step id is " + stepId);
         recipeStepViewPager.setCurrentItem(stepId);
 
-        // Hide tabs on landscape not-twoPane mode
-       /* int orientation = getResources().getConfiguration().orientation;
 
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE && !isTwoPane) {
-            recipeStepTabLayout.setVisibility(View.GONE);
-        }*/
-
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getArguments().getString("name"));
-        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        setHasOptionsMenu(true);
-
+        if (getResources().getConfiguration().smallestScreenWidthDp < 600) {
+            toolbar = (Toolbar) view.findViewById(R.id.fragment_step_toolbar);
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+            Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+            setHasOptionsMenu(true);
+        }
         return view;
     }
 

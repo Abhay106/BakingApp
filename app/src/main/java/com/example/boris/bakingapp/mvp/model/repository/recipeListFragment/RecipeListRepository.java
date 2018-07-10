@@ -1,5 +1,7 @@
 package com.example.boris.bakingapp.mvp.model.repository.recipeListFragment;
 
+import android.util.Log;
+
 import com.example.boris.bakingapp.entity.Ingredient;
 import com.example.boris.bakingapp.entity.RecipeModel;
 import com.example.boris.bakingapp.mvp.model.data.http.ApiService;
@@ -41,6 +43,7 @@ public class RecipeListRepository {
     }
 
     public void saveChosenRecipeName(int keySuffix, String name){
+        Log.d("CheckWidget", "In RecipeListRepository");
         prefs.saveChosenRecipeName(keySuffix, name);
     }
 

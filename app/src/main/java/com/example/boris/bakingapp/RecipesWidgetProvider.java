@@ -17,6 +17,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.functions.Consumer;
+
 /**
  * Implementation of App Widget functionality.
  */
@@ -42,15 +44,26 @@ public class RecipesWidgetProvider extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             String recipeName = widgetDataHelper.getRecipeNameFromPrefs(appWidgetId);
 
+            Log.d("CheckWidget", "In WidgetProvider and position is" +
+                    widgetDataHelper.getChosenRecipePosition());
+
+            Log.d("CheckWidget", "In WidgetProvider and position is " + recipeName);
+
             widgetDataHelper
                     .getIngredientsList(widgetDataHelper.getChosenRecipePosition())
                     .take(1)
                     .subscribe(
                             // OnNext
-                            ingredients ->
-                                    RecipesWidgetProvider
-                                            .updateAppWidgetContent(context, appWidgetManager, appWidgetId, recipeName,
-                                                    ingredients),
+                            ingredients -> {
+
+                                for (Ingredient ingredient : ingredients) {
+                                    Log.d("CheckWidget", "Ingredient is " + ingredient.getIngredient());
+                                }
+
+                                RecipesWidgetProvider
+                                        .updateAppWidgetContent(context, appWidgetManager,
+                                                appWidgetId, recipeName, ingredients);
+                            },
                             // OnError
                             throwable ->
                                     Log.d("Error", "Error: unable to populate widget data."));
@@ -70,6 +83,12 @@ public class RecipesWidgetProvider extends AppWidgetProvider {
     public static void updateAppWidgetContent(Context context, AppWidgetManager appWidgetManager,
                                               int appWidgetId, String recipeName, List<Ingredient> ingredients) {
 
+        Log.d("CheckWidget", "updateAppWidgetContent - recipeName is " + recipeName);
+        for (Ingredient ingredient: ingredients){
+            Log.d("CheckWidget", "updateAppWidgetContent - Ingredient is " + ingredient.getIngredient());
+        }
+
+
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list);
         views.setTextViewText(R.id.widget_recipe_name, recipeName);
         views.removeAllViews(R.id.widget_ingredients_container);
@@ -81,9 +100,13 @@ public class RecipesWidgetProvider extends AppWidgetProvider {
             String line = StringUtils.formatIngdedient(
                     context, ingredient.getIngredient(), ingredient.getQuantity(), ingredient.getMeasure());
 
+            Log.d("CheckWidget", "updateAppWidgetContent - line is " + line);
+
             ingredientView.setTextViewText(R.id.widget_ingredient_name, line);
             views.addView(R.id.widget_ingredients_container, ingredientView);
         }
+
+        Log.d("CheckWidget", "updateAppWidgetContent - appId is " + appWidgetId);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
