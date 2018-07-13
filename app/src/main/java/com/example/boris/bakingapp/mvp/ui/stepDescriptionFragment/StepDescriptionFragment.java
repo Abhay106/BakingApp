@@ -30,7 +30,6 @@ import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
@@ -96,6 +95,7 @@ public class StepDescriptionFragment extends MvpAppCompatFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG_WORK_CHECKING, "StepDescriptionFragment - onCreateView ");
+        setRetainInstance(true);
 
         int x = getArguments().getInt(StepDescriptionFragment.EXTRA_STEP_ID);
         if (savedInstanceState == null) {
@@ -113,7 +113,8 @@ public class StepDescriptionFragment extends MvpAppCompatFragment {
         view = inflater.inflate(R.layout.fragment_step_description, container, false);
         ButterKnife.bind(this, view);
 
-        viewPagerAdapter = new RecipeStepPageAdapter(getFragmentManager(), new ArrayList<>(0), getContext());
+        viewPagerAdapter = new RecipeStepPageAdapter(getFragmentManager(),
+                new ArrayList<>(0), getContext());
         recipeStepViewPager.setAdapter(viewPagerAdapter);
         setUpViewPagerListener();
         recipeStepTabLayout.setupWithViewPager(recipeStepViewPager);

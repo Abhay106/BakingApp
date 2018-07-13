@@ -103,7 +103,7 @@ public class DetailedFragment extends MvpAppCompatFragment implements StepsAdapt
         /**
          * Steps List
          */
-        stepsAdapter = new StepsAdapter(setOnItemClickCallback());
+        stepsAdapter = new StepsAdapter(setOnItemClickCallback(),getContext());
         recyclerSteps.setLayoutManager(new LinearLayoutManager(getActivity()));
         stepsList = new ArrayList<>();
         ArrayList<Step> listSteps = (ArrayList<Step>) getArguments().getSerializable("steps");
@@ -144,11 +144,16 @@ public class DetailedFragment extends MvpAppCompatFragment implements StepsAdapt
             public void onItemClicked(View view, int position) {
                 Step itemClicked = stepsList.get(position);
                 Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList("steps", new ArrayList<Parcelable>(getArguments().getParcelableArrayList("steps")));
+                bundle.putParcelableArrayList("steps", new ArrayList<>(getArguments().getParcelableArrayList("steps")));
+                List<Step> steps = new ArrayList<>(getArguments().getParcelableArrayList("steps"));
+                for (Step step: steps){
+                    Log.d("ListIteration", step.getThumbnailURL());
+                }
                 bundle.putString("description", itemClicked.getDescription());
                 bundle.putString("short_description", itemClicked.getShortDescription());
                 bundle.putString("videoURL", itemClicked.getVideoURL());
                 bundle.putString("thumbnailURL", itemClicked.getThumbnailURL());
+                Log.d(TAG_VAR_VALUE,"Thumb sending - " + itemClicked.getThumbnailURL());
                 bundle.putInt(EXTRA_STEP_ID, position);
                 bundle.putString("name", getArguments().getString("name"));
                 StepDescriptionFragment stepDescriptionFragment = StepDescriptionFragment.getInstance(0);

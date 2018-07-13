@@ -1,6 +1,13 @@
 package com.example.boris.bakingapp.mvp.ui.mainActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -8,6 +15,8 @@ import android.util.Log;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.boris.bakingapp.R;
+import com.example.boris.bakingapp.RecipeWidgetService;
+import com.example.boris.bakingapp.RecipesWidgetProvider;
 import com.example.boris.bakingapp.mvp.presentation.mainActivity.MainActivityPresenter;
 import com.example.boris.bakingapp.mvp.presentation.mainActivity.MainView;
 import com.example.boris.bakingapp.mvp.ui.recipeListFragment.RecipeListFragment;
@@ -29,6 +38,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
             Log.d(TAG_WORK_CHECKING, "MainActivity - savedInstanceState == null");
             openFragment();
         }
+
+
 //
        /*
         if (config.smallestScreenWidthDp >= 600)
