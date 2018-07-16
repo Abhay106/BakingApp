@@ -121,6 +121,7 @@ public class StepDescriptionFragment extends MvpAppCompatFragment {
 
         viewPagerAdapter.setSteps(getArguments().getParcelableArrayList("steps"));
 
+
         Log.d(TAG_VAR_VALUE, "Step id is " + stepId);
         recipeStepViewPager.setCurrentItem(stepId);
 

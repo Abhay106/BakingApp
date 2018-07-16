@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +22,7 @@ import com.example.boris.bakingapp.mvp.presentation.mainActivity.MainActivityPre
 import com.example.boris.bakingapp.mvp.presentation.mainActivity.MainView;
 import com.example.boris.bakingapp.mvp.ui.recipeListFragment.RecipeListFragment;
 
+import static com.example.boris.bakingapp.constants.Contract.TAG_VAR_VALUE;
 import static com.example.boris.bakingapp.constants.Contract.TAG_WORK_CHECKING;
 
 
@@ -38,6 +40,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
             Log.d(TAG_WORK_CHECKING, "MainActivity - savedInstanceState == null");
             openFragment();
         }
+
 
 
 //

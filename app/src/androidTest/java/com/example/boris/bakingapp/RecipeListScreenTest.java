@@ -28,7 +28,6 @@ import static org.hamcrest.Matchers.anything;
 
 @RunWith(AndroidJUnit4.class)
     public class RecipeListScreenTest {
-        public static final String RECIPE_NAME = "Brownies";
 
         @Rule
         public ActivityTestRule<MainActivity> activity = new ActivityTestRule<MainActivity>(MainActivity.class);
