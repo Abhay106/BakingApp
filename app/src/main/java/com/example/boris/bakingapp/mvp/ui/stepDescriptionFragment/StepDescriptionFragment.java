@@ -113,7 +113,7 @@ public class StepDescriptionFragment extends MvpAppCompatFragment {
         view = inflater.inflate(R.layout.fragment_step_description, container, false);
         ButterKnife.bind(this, view);
 
-        viewPagerAdapter = new RecipeStepPageAdapter(getFragmentManager(),
+        viewPagerAdapter = new RecipeStepPageAdapter(getChildFragmentManager(),
                 new ArrayList<>(0), getContext());
         recipeStepViewPager.setAdapter(viewPagerAdapter);
         setUpViewPagerListener();
