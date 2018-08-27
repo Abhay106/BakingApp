@@ -1,6 +1,6 @@
 Backing App created as a part of Udacity [Android Developer Nanodegree Program](https://www.udacity.com/course/android-developer-nanodegree-by-google--nd801).
 
-![Screen](<a href='https://hostingkartinok.com/show-image.php?id=dd06244c90322a264b582061ad573699' title='flickr analog'><img style="width:100%" src='https://s8.hostingkartinok.com/uploads/images/2018/08/dd06244c90322a264b582061ad573699.jpg' alt='Yes'  /></a>)
+![Screen](https://s8.hostingkartinok.com/uploads/images/2018/08/dd06244c90322a264b582061ad573699.jpg)
 
 ## Used Libraries
 * [RxJava 2](https://github.com/ReactiveX/RxJava), [RxAndroid](https://github.com/ReactiveX/RxAndroid), [RxJava2Interop](https://github.com/akarnokd/RxJava2Interop)
