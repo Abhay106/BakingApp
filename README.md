@@ -1,6 +1,6 @@
 Backing App created as a part of Udacity [Android Developer Nanodegree Program](https://www.udacity.com/course/android-developer-nanodegree-by-google--nd801).
 
-![alt text](https://s8.hostingkartinok.com/uploads/images/2018/08/dd06244c90322a264b582061ad573699.jpg)
+![alt text](http://images.vfl.ru/ii/1535398414/9e3d21fd/23081697.jpg)
 
 
 ![alt text](https://s8.hostingkartinok.com/uploads/images/2018/08/dd06244c90322a264b582061ad573699.jpg)
