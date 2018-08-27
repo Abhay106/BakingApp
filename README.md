@@ -2,23 +2,18 @@ Backing App created as a part of Udacity [Android Developer Nanodegree Program](
 
 ![alt text](http://images.vfl.ru/ii/1535398414/9e3d21fd/23081697.jpg)
 
-
-![alt text](https://s8.hostingkartinok.com/uploads/images/2018/08/dd06244c90322a264b582061ad573699.jpg)
 ## Used Libraries
-* [RxJava 2](https://github.com/ReactiveX/RxJava), [RxAndroid](https://github.com/ReactiveX/RxAndroid), [RxJava2Interop](https://github.com/akarnokd/RxJava2Interop)
+Dependency Injections:
 * [Dagger 2](https://github.com/google/dagger)
+* [ButterKnife](https://github.com/JakeWharton/butterknife)
+HTTP:
 * [Retrofit 2](https://github.com/square/retrofit) with [RxJava adapter](https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava2) and [Gson converter](https://github.com/square/retrofit/tree/master/retrofit-converters/gson)
 * [OkHttp](https://github.com/square/okhttp)
+React:
+* [RxJava 2](https://github.com/ReactiveX/RxJava)
+Other:
 * [Retrolambda](https://github.com/evant/gradle-retrolambda)
-* [ButterKnife](https://github.com/JakeWharton/butterknife)
-* [Gson](https://github.com/google/gson)
-* [AutoValue](https://github.com/google/auto) with [Gson extension](https://github.com/rharter/auto-value-gson)
-* [SqlBrite](https://github.com/square/sqlbrite)
 * [Glide](https://github.com/bumptech/glide)
-* [Material Values](https://github.com/AoDevBlue/MaterialValues)
-* [Stetho](https://github.com/facebook/stetho)
-* [LeakCanary](https://github.com/square/leakcanary)
-* [Timber](https://github.com/JakeWharton/timber)
 * [ExoPlayer](https://github.com/google/ExoPlayer)
 
 ## Project Overview
