@@ -6,11 +6,14 @@ Backing App created as a part of Udacity [Android Developer Nanodegree Program](
 Dependency Injections:
 * [Dagger 2](https://github.com/google/dagger)
 * [ButterKnife](https://github.com/JakeWharton/butterknife)
+___
 HTTP:
 * [Retrofit 2](https://github.com/square/retrofit) with [RxJava adapter](https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava2) and [Gson converter](https://github.com/square/retrofit/tree/master/retrofit-converters/gson)
 * [OkHttp](https://github.com/square/okhttp)
+___
 React:
 * [RxJava 2](https://github.com/ReactiveX/RxJava)
+___
 Other:
 * [Retrolambda](https://github.com/evant/gradle-retrolambda)
 * [Glide](https://github.com/bumptech/glide)
